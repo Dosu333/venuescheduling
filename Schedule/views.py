@@ -152,9 +152,8 @@ def delete(request, id):
     date = str(ItemToDelete.Date)
     purpose = ItemToDelete.purpose
     ItemToDelete.delete()
-
+    print(date)
     messages.success(request, "Your have successfully cancelled your schedule for a %s at %s on %s" %(purpose, venue, date))
 
     return HttpResponseRedirect('/Schedule/allocation/')
 
-def ii():
