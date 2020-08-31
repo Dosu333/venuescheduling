@@ -156,5 +156,3 @@ def delete(request, id):
     messages.success(request, "Your have successfully cancelled your schedule for a %s at %s on %s" %(purpose, venue, date))
 
     return HttpResponseRedirect('/Schedule/allocation/')
-
-def ii():
