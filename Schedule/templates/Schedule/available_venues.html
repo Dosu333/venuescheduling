@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="list-group">
+
+    {% if ven_show %}
+
+      {% for items in ven_show %}
+        <a href="{% url 'Schedule:successful' items %}" class="list-group-item list-group-item-action btn btn-outline-secondary">
+        {{items}}
+        </a>
+      {% endfor %}
+
+    {% else %}
+      <p>NO VENUES</p>
+    {% endif %}
+    {% for items in ven_no %}
+      {{items}}
+    {% endfor %}
+  {% endblock %}

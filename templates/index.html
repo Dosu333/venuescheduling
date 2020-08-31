@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="jumbotron">
+    <div class= "container">
+      <h1 class="display-4">Welcome, to the Venue Scheduler</h1>
+      <p class="lead">Through this platform lecturers and students can easily schedule for venues of their choice, access school timetables and even edit the timetables to include extracurricular events of choice.</p>
+      <hr class="my-4">
+      <a class="btn btn-dark btn-lg" href="{% url 'accounts:signup' %}" role="button">Register</a>
+
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

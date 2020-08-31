@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class = "alert alert-success" role="alert" >{{message}}</li>
+
+      {% endfor %}
+    </ul>
+
+  {% endif %}
+
+  {% if users_allocation %}
+     {% for items in users_allocation %}
+       <div class="accordion" id="accordionExample">
+         <div class="card">
+           <div class="card-header" id="headingTwo">
+         <h2 class="mb-0">
+           <button class="btn btn-dark btn-block text-left collapsed" type="button" data-toggle="collapse show" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+             {{items.Venue}}
+           </button>
+         </h2>
+       </div>
+       <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionExample">
+         <div class="card-body">
+           <b>Name:</b> {{items.Name}} {{items.purpose}}<br>
+           {% if items.days == None %}
+              <b>Date:</b> {{items.Date}}<br>
+            {% else %}
+              <b>Day:</b> {{items.get_days_display}}<br>
+           {% endif %}
+          <b>Time:</b> {{items.start_time}}-{{items.end_time}}<br><br>
+
+          <a class="btn btn-danger btn-sm" href="{% url 'Schedule:delete' items.id %}" role="button">Cancel Allocation</a>
+         </div>
+       </div>
+     </div>
+    </div>
+     {% endfor %}
+
+  {% else %}
+    <div class="alert alert-dark">
+      NO venue is allocated to you at the moment. To schedule a venue <a href="{% url 'Schedule:schedule' %}" class="badge badge-info">click here</a>
+    </div>
+
+  {% endif %}
+
+{% endblock %}
