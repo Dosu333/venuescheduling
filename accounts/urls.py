@@ -10,7 +10,7 @@ app_name = 'accounts'
 
 urlpatterns =[
     path('login/', LoginView.as_view(), name = 'login'),
-    path('register/',RegistrationView.as_view(form_class=RegisterForm), name='signup'),
+    path('register/',RegisterView.as_view(), name='signup'),
     path('logout/', views.logout, name = 'logout'),
     path('activate/complete',TemplateView.as_view(template_name='django_registration/activation_complete.html'), name = 'activation_complete'),
     path('activate/',ActivationView.as_view(), name = 'django_registration_activate'),

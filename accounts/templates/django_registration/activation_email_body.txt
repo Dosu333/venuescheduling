@@ -1,6 +1,0 @@
-Greetings,
-  You just signed up for an account at {{site.name}}. Please click the link below to activate:
-
-  {{scheme}}://{{site.domain}}{% url 'django_registration_activate' activation_key=activation_key %}
-
-  This link is valid for {{ expiration_days }} days.

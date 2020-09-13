@@ -1,6 +1,7 @@
 from django.shortcuts import render,  get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import FormView, TemplateView
+from django.views.generic.edit import DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .forms import ScheduleForm
@@ -19,10 +20,6 @@ def getDayOfWeek(ojo):
         str_date = str(ojo)
         format_date = date.fromisoformat(str_date)
         return str(format_date.weekday())
-
-
-
-
 
 class ScheduleView(FormView):
     form_class = ScheduleForm
@@ -77,11 +74,6 @@ class ScheduleView(FormView):
                 if items.start_time != start_time:
                     ven_show.append(items)
 
-                    # elif purpose == "Lecture" and items.purpose != "Lecture" and items.purpose != "Meeting" and date.today().weekday() + 3 <= int(day):
-                    #     ven_show.append(items)
-                    # elif purpose != "Meeting" and items.purpose == "Meeting" and date.today().weekday() + 2 <= int(day):
-                    #     ven_show.append(items)
-
                 else:
                     ven_no.append(items)
 
@@ -119,9 +111,6 @@ class ScheduleView(FormView):
             return render(request, self.template_name, context)
 
 
-
-
-
 def SuccessView(request, venue):
     name = request.session['Name']
     strDate = request.session['strDate']
@@ -145,16 +134,10 @@ class AllocatedVenueView(TemplateView):
 
         return render(request, self.template_name, {'users_allocation':users_allocation})
 
+class delTable(SuccessMessageMixin, DeleteView):
+    model = Timetable
+    success_url = '/Schedule/allocation/'
+    success_message = "Deleted Successfully"
 
-def delete(request, id):
-    ItemToDelete = get_object_or_404(Timetable,pk=id)
-    venue = ItemToDelete.Venue
-    date = str(ItemToDelete.Date)
-    purpose = ItemToDelete.purpose
-    ItemToDelete.delete()
-
-    messages.success(request, "Your have successfully cancelled your schedule for a %s at %s on %s" %(purpose, venue, date))
-
-    return HttpResponseRedirect('/Schedule/allocation/')
-
-def ii():
+class calendarview(TemplateView):
+    template_name = 'Schedule/calendar.html'

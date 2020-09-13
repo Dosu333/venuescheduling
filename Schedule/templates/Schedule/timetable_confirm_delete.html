@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <p>Are  you sure you want to delete {{object.Name}} {{object.purpose}} at {{object}} on {{object.Date}}?</p>
+    <button type="submit" class="btn btn-danger">Confirm</button>
+    <a href="{% url 'Schedule:allocation' %}" class="btn btn-primary">Cancel</a>
+{% endblock %}
+</form>

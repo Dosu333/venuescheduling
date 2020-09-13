@@ -28,7 +28,7 @@ class RegisterForm(forms.ModelForm):
         # Save the provided password in hashed format
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.active=False #send confirmation mail to be true
+        user.is_active=True #send confirmation mail to be true
         if commit:
             user.save()
         return user

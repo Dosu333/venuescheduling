@@ -45,29 +45,7 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
-# def login_page(request):
-#     form = LoginForm(request.POST or None)
-#     context ={
-#         "form": form
-#     }
-   #
-#         else:
-#             print("Error")
-#         return render(request, "accounts/login.html", context)
-
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'accounts/signup.html'
-    success_url = reverse_lazy('login')
-
-
-
-# User = get_user_model()
-# def register_page(request):
-#     form = RegisterForm(request.POST or None)
-#     context ={
-#         'form':form
-#     }
-#     if form.is_valid():
-#         form.save()
-#     return render(request, "accounts/signup.html", context)
+    success_url = reverse_lazy('accounts:login')
